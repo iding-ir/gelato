@@ -1,0 +1,6 @@
+.Thumbnails {
+  padding: 1rem;
+  grid-column: start/sidebar-start;
+  grid-row: thumbnails-start/thumbnails-end;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

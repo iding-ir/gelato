@@ -1,0 +1,6 @@
+.Sidebar {
+  padding: 1rem;
+  grid-column: sidebar-start/sidebar-end;
+  grid-row: start/end;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}

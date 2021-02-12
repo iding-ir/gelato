@@ -1,15 +1,18 @@
 import React from "react";
 
 import "./App.scss";
-import Main from "./components/Main/Main";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Postcard from "./components/Postcard/Postcard";
+import Thumbnails from "./components/Thumbnails/Thumbnails";
 
 function App() {
   return (
     <div className="app">
-      <Main />
-
       <Sidebar />
+
+      <Postcard />
+
+      <Thumbnails />
     </div>
   );
 }
