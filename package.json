@@ -1,7 +1,26 @@
 {
   "name": "gelato",
   "version": "0.1.0",
-  "private": true,
+  "description": "React and redux image manipulator.",
+  "keywords": [
+    "React",
+    "Redux",
+    "image",
+    "manipulator"
+  ],
+  "author": {
+    "name": "Aydin Ghane Kh.",
+    "email": "aydin.ghane.kh@gmail.com",
+    "url": "http://iding.ir"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iding-ir/gelato.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iding-ir/gelato/issues"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -10,6 +29,7 @@
     "@types/node": "^12.20.0",
     "@types/react": "^17.0.1",
     "@types/react-dom": "^17.0.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
