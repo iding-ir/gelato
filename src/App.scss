@@ -2,6 +2,6 @@
   display: grid;
   grid-gap: 10px;
   grid-template-columns: [start postcard-start] 1fr [postcard-end sidebar-start] 360px [sidebar-end end];
-  grid-template-rows: [start postcard-start] 1fr [postcard-end thumbnails-start] 180px [thumbnails-end end];
+  grid-template-rows: [start postcard-start] auto [postcard-end thumbnails-start] 180px [thumbnails-end end];
   height: 100%;
 }
