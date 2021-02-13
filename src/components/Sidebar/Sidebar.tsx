@@ -17,7 +17,14 @@ const Sidebar = () => {
   const current = useSelector((state: IState) => state.images.current);
 
   const insertText = () => {
-    dispatch(setText("SUNNY DAY", [Math.random() * 500, Math.random() * 500]));
+    Jimp.read(edits[current]).then((image) => {
+      dispatch(
+        setText("SUNNY DAY", [
+          Math.random() * image.bitmap.width,
+          Math.random() * image.bitmap.height,
+        ])
+      );
+    });
   };
 
   const zoomIn = () => {
