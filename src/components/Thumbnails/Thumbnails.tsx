@@ -21,6 +21,7 @@ const Thumbnails = () => {
         key={image}
         src={edits[image] || originals[image]}
         alt={image}
+        data-component-name={`thumb-${image}`}
         onClick={() => onClick(image)}
       />
     ));

@@ -40,7 +40,13 @@ const Postcard = () => {
   }, [position]);
 
   const renderImage = () => {
-    return <img src={edits[current] || originals[current]} alt={current} />;
+    return (
+      <img
+        src={edits[current] || originals[current]}
+        alt={current}
+        data-component-name={`full-${current}`}
+      />
+    );
   };
 
   return <div className="Postcard">{renderImage()}</div>;

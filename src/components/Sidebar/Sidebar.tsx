@@ -111,26 +111,42 @@ const Sidebar = () => {
 
   return (
     <div className="Sidebar">
-      <button onClick={() => dispatch(showModal())}>
+      <button
+        onClick={() => dispatch(showModal())}
+        data-component-name="nextBlock"
+      >
         {t("sidebar.nextBlock")}
       </button>
 
-      <button onClick={handleZoomIn}>{t("sidebar.zoomIn")}</button>
+      <button onClick={handleZoomIn} data-component-name="zoomIn">
+        {t("sidebar.zoomIn")}
+      </button>
 
-      <button onClick={handleZoomOut}>{t("sidebar.zoomOut")}</button>
+      <button onClick={handleZoomOut} data-component-name="zoomOut">
+        {t("sidebar.zoomOut")}
+      </button>
 
-      <button onClick={handleRotate}>{t("sidebar.rotate")}</button>
+      <button onClick={handleRotate} data-component-name="rotate">
+        {t("sidebar.rotate")}
+      </button>
 
-      <div onClick={handleClickOverlay} className={modalClassnames}>
+      <div
+        onClick={handleClickOverlay}
+        className={modalClassnames}
+        data-component-name="overlay"
+      >
         <div className="wrapper">
           <input
             type="text"
             onClick={handleClickInput}
             onBlur={handleSetText}
             placeholder={t("modal.placeholder")}
+            data-component-name="text-input"
           />
 
-          <button onClick={handleInsertText}>{t("modal.submit")}</button>
+          <button onClick={handleInsertText} data-component-name="text-submit">
+            {t("modal.submit")}
+          </button>
         </div>
 
         {jimps[current] && (
@@ -141,6 +157,7 @@ const Sidebar = () => {
               max={jimps[current].bitmap.width}
               step={10}
               onClick={handleClickInput}
+              data-component-name="left-range"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setLeft(parseInt(event.target.value));
               }}
@@ -158,6 +175,7 @@ const Sidebar = () => {
               max={jimps[current].bitmap.height}
               step={10}
               onClick={handleClickInput}
+              data-component-name="top-range"
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setTop(parseInt(event.target.value));
               }}
