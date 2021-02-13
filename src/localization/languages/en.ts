@@ -8,5 +8,7 @@ export const enTranslations = {
   modal: {
     submit: "Submit",
     placeholder: "Example: SUNNY DAY",
+    top: "Top: {{top}}",
+    left: "Left: {{left}}",
   },
 };

@@ -146,7 +146,7 @@ const Sidebar = () => {
               }}
             />
 
-            <span>Left: {left}</span>
+            <span>{t("modal.left", { left })}</span>
           </div>
         )}
 
@@ -163,7 +163,7 @@ const Sidebar = () => {
               }}
             />
 
-            <span>Top: {top}</span>
+            <span>{t("modal.top", { top })}</span>
           </div>
         )}
       </div>
