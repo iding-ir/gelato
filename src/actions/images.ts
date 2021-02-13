@@ -1,4 +1,4 @@
-import { IMAGES_SET_IMAGE, IMAGES_SET_BASE64 } from "../constants";
+import { IMAGES_SET_IMAGE, IMAGES_SET_EDIT } from "../constants";
 
 export interface IAction {
   type: string;
@@ -12,9 +12,9 @@ export const setImage = (index: string): IAction => {
   };
 };
 
-export const setBase64 = (index: string, base64: string): IAction => {
+export const setEdit = (index: string, base64: string): IAction => {
   return {
-    type: IMAGES_SET_BASE64,
+    type: IMAGES_SET_EDIT,
     payload: { index, base64 },
   };
 };

@@ -9,8 +9,8 @@ import { setText } from "../../actions/texts";
 const Thumbnails = () => {
   const dispatch = useDispatch();
 
-  const images = useSelector((state: IState) => state.images.images);
-  const base64s = useSelector((state: IState) => state.images.base64s);
+  const originals = useSelector((state: IState) => state.images.originals);
+  const edits = useSelector((state: IState) => state.images.edits);
 
   const onClick = (image: string) => {
     dispatch(setImage(image));
@@ -19,10 +19,10 @@ const Thumbnails = () => {
   };
 
   const renderThumbnails = () =>
-    Object.keys(images).map((image: string) => (
+    Object.keys(originals).map((image: string) => (
       <img
         key={image}
-        src={base64s[image] || images[image]}
+        src={edits[image] || originals[image]}
         alt={image}
         onClick={() => onClick(image)}
       />

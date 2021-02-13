@@ -1,4 +1,4 @@
 export const IMAGES_SET_IMAGE = "IMAGES_SET_IMAGE";
-export const IMAGES_SET_BASE64 = "IMAGES_SET_BASE64";
+export const IMAGES_SET_EDIT = "IMAGES_SET_EDIT";
 
-export const TEXTS_SET = "TEXTS_SET";
+export const TEXTS_SET_TEXT = "TEXTS_SET_TEXT";

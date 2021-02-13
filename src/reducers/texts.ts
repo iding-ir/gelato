@@ -1,4 +1,4 @@
-import { TEXTS_SET } from "../constants";
+import { TEXTS_SET_TEXT } from "../constants";
 import { IAction, Text } from "../actions/texts";
 
 export interface IStateTexts {
@@ -11,7 +11,7 @@ const initialState: IStateTexts = {
 
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case TEXTS_SET:
+    case TEXTS_SET_TEXT:
       return { ...state, text: action.payload };
     default:
       return state;

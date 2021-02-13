@@ -1,4 +1,4 @@
-import { TEXTS_SET } from "../constants";
+import { TEXTS_SET_TEXT } from "../constants";
 
 export interface Text {
   text: string;
@@ -12,7 +12,7 @@ export interface IAction {
 
 export const setText = (text: string, position: [number, number]): IAction => {
   return {
-    type: TEXTS_SET,
+    type: TEXTS_SET_TEXT,
     payload: { text, position },
   };
 };

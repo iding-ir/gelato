@@ -6,15 +6,15 @@ import Jimp from "jimp";
 import "./Sidebar.scss";
 import { IState } from "../../reducers";
 import { setText } from "../../actions/texts";
-import { setBase64 } from "../../actions/images";
+import { setEdit } from "../../actions/images";
 
 const Sidebar = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
-  const base64s = useSelector((state: IState) => state.images.base64s);
-  const images = useSelector((state: IState) => state.images.images);
+  const edits = useSelector((state: IState) => state.images.edits);
+  const originals = useSelector((state: IState) => state.images.originals);
   const current = useSelector((state: IState) => state.images.current);
 
   const insertText = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
   };
 
   const zoomIn = () => {
-    Jimp.read(base64s[current]).then((image) => {
+    Jimp.read(edits[current]).then((image) => {
       image
         .resize(image.bitmap.width * 2, image.bitmap.height * 2)
         .quality(100)
@@ -33,23 +33,23 @@ const Sidebar = () => {
           image.bitmap.height / 2
         )
         .getBase64("image/jpeg", (err, data) => {
-          dispatch(setBase64(current, data));
+          dispatch(setEdit(current, data));
         });
     });
   };
 
   const zoomOut = () => {
-    Jimp.read(images[current]).then((image) => {
+    Jimp.read(originals[current]).then((image) => {
       image.getBase64("image/jpeg", (err, data) => {
-        dispatch(setBase64(current, data));
+        dispatch(setEdit(current, data));
       });
     });
   };
 
   const rotate = () => {
-    Jimp.read(base64s[current]).then((image) => {
+    Jimp.read(edits[current]).then((image) => {
       image.rotate(90).getBase64("image/jpeg", (err, data) => {
-        dispatch(setBase64(current, data));
+        dispatch(setEdit(current, data));
       });
     });
   };
