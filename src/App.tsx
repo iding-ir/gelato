@@ -1,9 +1,9 @@
 import React from "react";
 
 import "./App.scss";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Postcard from "./components/Postcard/Postcard";
-import Thumbnails from "./components/Thumbnails/Thumbnails";
+import { Sidebar } from "./components/Sidebar";
+import { Postcard } from "./components/Postcard";
+import { Thumbnails } from "./components/Thumbnails";
 
 function App() {
   return (
