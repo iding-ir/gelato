@@ -14,7 +14,6 @@ const Sidebar = () => {
   const dispatch = useDispatch();
 
   const edits = useSelector((state: IState) => state.images.edits);
-  const originals = useSelector((state: IState) => state.images.originals);
   const current = useSelector((state: IState) => state.images.current);
 
   const insertText = () => {
@@ -39,10 +38,13 @@ const Sidebar = () => {
   };
 
   const zoomOut = () => {
-    Jimp.read(originals[current]).then((image) => {
-      image.getBase64("image/jpeg", (err, data) => {
-        dispatch(setEdit(current, data));
-      });
+    Jimp.read(edits[current]).then((image) => {
+      image
+        .resize(image.bitmap.width / 2, image.bitmap.height / 2)
+        .quality(100)
+        .getBase64("image/jpeg", (err, data) => {
+          dispatch(setEdit(current, data));
+        });
     });
   };
 
