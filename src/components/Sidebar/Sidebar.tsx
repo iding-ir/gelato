@@ -1,17 +1,31 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import "./Sidebar.scss";
+import { IState } from "../../reducers";
+import { addText } from "../../actions/texts";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+
+  const images = useSelector((state: IState) => state.images.images);
+
+  const insertText = () => {
+    dispatch(addText("SUNNY DAY", [Math.random() * 500, Math.random() * 500]));
+  };
+
   return (
     <div className="Sidebar">
-      <button>Next Text Block</button>
+      <button onClick={insertText}>{t("sidebar.nextBlock")}</button>
 
-      <button>Zoom In</button>
+      <button>{t("sidebar.zoomIn")}</button>
 
-      <button>Zoom Out</button>
+      <button>{t("sidebar.zoomOut")}</button>
 
-      <button>Rotate</button>
+      <button>{t("sidebar.rotate")}</button>
     </div>
   );
 };
