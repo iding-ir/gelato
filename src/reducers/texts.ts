@@ -1,18 +1,18 @@
-import { TEXTS_ADD } from "../constants";
+import { TEXTS_SET } from "../constants";
 import { IAction, Text } from "../actions/texts";
 
 export interface IStateTexts {
-  texts: Text[];
+  text: Text | null;
 }
 
 const initialState: IStateTexts = {
-  texts: [],
+  text: null,
 };
 
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case TEXTS_ADD:
-      return { ...state, texts: [...state.texts, action.payload] };
+    case TEXTS_SET:
+      return { ...state, text: action.payload };
     default:
       return state;
   }

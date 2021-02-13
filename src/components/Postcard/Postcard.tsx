@@ -1,43 +1,48 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Jimp from "jimp";
 
 import "./Postcard.scss";
 import { IState } from "../../reducers";
-import { Text } from "../../actions/texts";
+import { setBase64 } from "../../actions/images";
 
 const Postcard = () => {
+  const dispatch = useDispatch();
+
+  const base64s = useSelector((state: IState) => state.images.base64s);
   const images = useSelector((state: IState) => state.images.images);
   const current = useSelector((state: IState) => state.images.current);
-  const texts = useSelector((state: IState) => state.texts.texts);
+  const text = useSelector((state: IState) => state.texts.text);
 
   const [b64Image, setB64Image] = useState();
 
   useEffect(() => {
     let loadedImage: any;
 
-    Jimp.read(images[current])
+    Jimp.read(base64s[current] || images[current])
       .then((image) => {
         loadedImage = image;
 
         return Jimp.loadFont(Jimp.FONT_SANS_64_WHITE);
       })
       .then((font) => {
-        texts.forEach((text: Text, index: number) => {
+        if (text) {
           loadedImage = loadedImage.print(
             font,
             text.position[0],
             text.position[1],
             text.text
           );
-        });
+        }
 
         loadedImage.getBase64(Jimp.AUTO, (err: any, data: any) => {
           setB64Image(data);
+
+          dispatch(setBase64(current, data));
         });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current, texts]);
+  }, [current, text]);
 
   const renderImage = () => {
     return b64Image && <img src={b64Image} alt="postcard" />;

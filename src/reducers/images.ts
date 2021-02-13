@@ -1,4 +1,4 @@
-import { IMAGES_SET } from "../constants";
+import { IMAGES_SET_IMAGE, IMAGES_SET_BASE64 } from "../constants";
 import { IAction } from "../actions/images";
 
 const images = {
@@ -8,18 +8,28 @@ const images = {
 
 export interface IStateImages {
   images: { [key: string]: string };
+  base64s: { [key: string]: string };
   current: string;
 }
 
 const initialState: IStateImages = {
   images,
+  base64s: {},
   current: Object.keys(images)[0],
 };
 
 const reducer = (state = initialState, action: IAction) => {
   switch (action.type) {
-    case IMAGES_SET:
-      return { ...state, current: action.payload };
+    case IMAGES_SET_IMAGE:
+      return { ...state, current: action.payload.index };
+    case IMAGES_SET_BASE64:
+      return {
+        ...state,
+        base64s: {
+          ...state.base64s,
+          [action.payload.index]: action.payload.base64,
+        },
+      };
     default:
       return state;
   }
