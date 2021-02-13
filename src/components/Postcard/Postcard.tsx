@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Jimp from "jimp";
 
@@ -13,8 +13,6 @@ const Postcard = () => {
   const images = useSelector((state: IState) => state.images.images);
   const current = useSelector((state: IState) => state.images.current);
   const text = useSelector((state: IState) => state.texts.text);
-
-  const [b64Image, setB64Image] = useState();
 
   useEffect(() => {
     let loadedImage: any;
@@ -36,8 +34,6 @@ const Postcard = () => {
         }
 
         loadedImage.getBase64(Jimp.AUTO, (err: any, data: any) => {
-          setB64Image(data);
-
           dispatch(setBase64(current, data));
         });
       });
@@ -45,7 +41,7 @@ const Postcard = () => {
   }, [current, text]);
 
   const renderImage = () => {
-    return b64Image && <img src={b64Image} alt="postcard" />;
+    return <img src={base64s[current] || images[current]} alt="postcard" />;
   };
 
   return <div className="Postcard">{renderImage()}</div>;
