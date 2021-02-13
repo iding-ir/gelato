@@ -2,26 +2,34 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Jimp from "jimp";
+import clsx from "clsx";
 
 import "./Sidebar.scss";
 import { IState } from "../../reducers";
-import { setText } from "../../actions/texts";
+import { setText, addText } from "../../actions/texts";
 import { setEdit } from "../../actions/images";
+import { showModal, hideModal } from "../../actions/modal";
 
 const Sidebar = () => {
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
+  const originals = useSelector((state: IState) => state.images.originals);
   const edits = useSelector((state: IState) => state.images.edits);
   const current = useSelector((state: IState) => state.images.current);
+  const modalVisibility = useSelector(
+    (state: IState) => state.modal.visibility
+  );
 
   const insertText = () => {
-    Jimp.read(edits[current]).then((image) => {
+    dispatch(hideModal());
+
+    Jimp.read(edits[current] || originals[current]).then((image) => {
       dispatch(
-        setText("SUNNY DAY", [
-          Math.random() * image.bitmap.width,
-          Math.random() * image.bitmap.height,
+        addText([
+          Math.round(Math.random() * image.bitmap.width - 50),
+          Math.round(Math.random() * image.bitmap.height - 50),
         ])
       );
     });
@@ -63,15 +71,42 @@ const Sidebar = () => {
     });
   };
 
+  const modalClassnames = clsx("overlay", {
+    visible: modalVisibility,
+  });
+
   return (
     <div className="Sidebar">
-      <button onClick={insertText}>{t("sidebar.nextBlock")}</button>
+      <button onClick={() => dispatch(showModal())}>
+        {t("sidebar.nextBlock")}
+      </button>
 
       <button onClick={zoomIn}>{t("sidebar.zoomIn")}</button>
 
       <button onClick={zoomOut}>{t("sidebar.zoomOut")}</button>
 
       <button onClick={rotate}>{t("sidebar.rotate")}</button>
+
+      <div
+        className={modalClassnames}
+        onClick={() => {
+          dispatch(hideModal());
+        }}
+      >
+        <div className="wrapper">
+          <input
+            type="text"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+            onBlur={(event) => {
+              dispatch(setText(event.target.value));
+            }}
+          />
+
+          <button onClick={() => insertText()}>Submit</button>
+        </div>
+      </div>
     </div>
   );
 };

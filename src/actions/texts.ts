@@ -1,18 +1,20 @@
-import { TEXTS_SET_TEXT } from "../constants";
-
-export interface Text {
-  text: string;
-  position: [number, number];
-}
+import { TEXTS_SET_TEXT, TEXTS_ADD_TEXT } from "../constants";
 
 export interface IAction {
   type: string;
-  payload: Text;
+  payload: string | [number, number];
 }
 
-export const setText = (text: string, position: [number, number]): IAction => {
+export const addText = (position: [number, number]): IAction => {
+  return {
+    type: TEXTS_ADD_TEXT,
+    payload: position,
+  };
+};
+
+export const setText = (text: string): IAction => {
   return {
     type: TEXTS_SET_TEXT,
-    payload: { text, position },
+    payload: text,
   };
 };

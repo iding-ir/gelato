@@ -13,6 +13,7 @@ const Postcard = () => {
   const originals = useSelector((state: IState) => state.images.originals);
   const current = useSelector((state: IState) => state.images.current);
   const text = useSelector((state: IState) => state.texts.text);
+  const position = useSelector((state: IState) => state.texts.position);
 
   useEffect(() => {
     let loadedImage: any;
@@ -24,13 +25,8 @@ const Postcard = () => {
         return Jimp.loadFont(Jimp.FONT_SANS_64_WHITE);
       })
       .then((font) => {
-        if (text) {
-          loadedImage = loadedImage.print(
-            font,
-            text.position[0],
-            text.position[1],
-            text.text
-          );
+        if (text && position) {
+          loadedImage = loadedImage.print(font, position[0], position[1], text);
         }
 
         loadedImage.getBase64(Jimp.AUTO, (err: any, data: any) => {
@@ -38,7 +34,7 @@ const Postcard = () => {
         });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current, text]);
+  }, [position]);
 
   const renderImage = () => {
     return <img src={edits[current] || originals[current]} alt={current} />;
