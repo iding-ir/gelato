@@ -17,7 +17,7 @@ export interface IStateImages {
   current: string;
 }
 
-const initialState: IStateImages = {
+export const initialState: IStateImages = {
   originals,
   edits: {},
   jimps: {},

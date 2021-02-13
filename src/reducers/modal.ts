@@ -5,7 +5,7 @@ export interface IStateModal {
   visibility: boolean;
 }
 
-const initialState: IStateModal = {
+export const initialState: IStateModal = {
   visibility: false,
 };
 

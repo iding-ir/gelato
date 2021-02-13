@@ -6,7 +6,7 @@ export interface IStateTexts {
   position: [number, number];
 }
 
-const initialState: IStateTexts = {
+export const initialState: IStateTexts = {
   text: "SUNNY DAY",
   position: [0, 0],
 };
