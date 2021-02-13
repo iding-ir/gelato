@@ -46,6 +46,14 @@ const Sidebar = () => {
     });
   };
 
+  const rotate = () => {
+    Jimp.read(base64s[current]).then((image) => {
+      image.rotate(90).getBase64("image/jpeg", (err, data) => {
+        dispatch(setBase64(current, data));
+      });
+    });
+  };
+
   return (
     <div className="Sidebar">
       <button onClick={insertText}>{t("sidebar.nextBlock")}</button>
@@ -54,7 +62,7 @@ const Sidebar = () => {
 
       <button onClick={zoomOut}>{t("sidebar.zoomOut")}</button>
 
-      <button>{t("sidebar.rotate")}</button>
+      <button onClick={rotate}>{t("sidebar.rotate")}</button>
     </div>
   );
 };
