@@ -24,6 +24,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     position: absolute;
     top: 0;
     left: 0;
@@ -41,9 +42,12 @@
 
     .wrapper {
       display: flex;
+      width: 320px;
       cursor: pointer;
 
       input {
+        flex-grow: 10;
+        flex-shrink: 10;
         border: none;
         outline: none;
         padding: 0 1rem;
@@ -67,6 +71,14 @@
         color: #ffffff;
         background-color: #63abff;
         cursor: pointer;
+      }
+
+      span {
+        width: 120px;
+        height: 3rem;
+        line-height: 3rem;
+        text-align: right;
+        color: #ffffff;
       }
     }
   }
