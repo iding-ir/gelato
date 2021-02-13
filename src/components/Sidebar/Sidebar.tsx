@@ -35,7 +35,7 @@ const Sidebar = () => {
         throw error;
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
+  }, [current, edits]);
 
   const handleInsertText = () => {
     dispatch(hideModal());
