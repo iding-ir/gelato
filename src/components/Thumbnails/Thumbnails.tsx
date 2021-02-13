@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Thumbnails.scss";
 import { IState } from "../../reducers";
 import { setImage } from "../../actions/images";
-import { addText } from "../../actions/texts";
 
 const Thumbnails = () => {
   const dispatch = useDispatch();

@@ -8,14 +8,10 @@ export interface IAction {
   type: string;
 }
 
-export const showModal = (): IAction => {
-  return {
-    type: MODAL_SHOW,
-  };
-};
+export const showModal = (): IAction => ({
+  type: MODAL_SHOW,
+});
 
-export const hideModal = (): IAction => {
-  return {
-    type: MODAL_HIDE,
-  };
-};
+export const hideModal = (): IAction => ({
+  type: MODAL_HIDE,
+});

@@ -5,16 +5,12 @@ export interface IAction {
   payload: { index: string; base64?: string };
 }
 
-export const setImage = (index: string): IAction => {
-  return {
-    type: IMAGES_SET_IMAGE,
-    payload: { index },
-  };
-};
+export const setImage = (index: string): IAction => ({
+  type: IMAGES_SET_IMAGE,
+  payload: { index },
+});
 
-export const setEdit = (index: string, base64: string): IAction => {
-  return {
-    type: IMAGES_SET_EDIT,
-    payload: { index, base64 },
-  };
-};
+export const setEdit = (index: string, base64: string): IAction => ({
+  type: IMAGES_SET_EDIT,
+  payload: { index, base64 },
+});

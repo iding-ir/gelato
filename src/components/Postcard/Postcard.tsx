@@ -29,9 +29,12 @@ const Postcard = () => {
           loadedImage = loadedImage.print(font, position[0], position[1], text);
         }
 
-        loadedImage.getBase64(Jimp.AUTO, (err: any, data: any) => {
+        loadedImage.getBase64(Jimp.AUTO, (error: Error, data: string) => {
           dispatch(setEdit(current, data));
         });
+      })
+      .catch((error: Error) => {
+        throw error;
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [position]);

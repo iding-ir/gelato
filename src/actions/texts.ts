@@ -5,16 +5,12 @@ export interface IAction {
   payload: string | [number, number];
 }
 
-export const addText = (position: [number, number]): IAction => {
-  return {
-    type: TEXTS_ADD_TEXT,
-    payload: position,
-  };
-};
+export const addText = (position: [number, number]): IAction => ({
+  type: TEXTS_ADD_TEXT,
+  payload: position,
+});
 
-export const setText = (text: string): IAction => {
-  return {
-    type: TEXTS_SET_TEXT,
-    payload: text,
-  };
-};
+export const setText = (text: string): IAction => ({
+  type: TEXTS_SET_TEXT,
+  payload: text,
+});

@@ -22,53 +22,83 @@ const Sidebar = () => {
     (state: IState) => state.modal.visibility
   );
 
-  const insertText = () => {
+  const handleInsertText = () => {
     dispatch(hideModal());
 
-    Jimp.read(edits[current] || originals[current]).then((image) => {
-      dispatch(
-        addText([
-          Math.round(Math.random() * image.bitmap.width - 50),
-          Math.round(Math.random() * image.bitmap.height - 50),
-        ])
-      );
-    });
-  };
-
-  const zoomIn = () => {
-    Jimp.read(edits[current]).then((image) => {
-      image
-        .resize(image.bitmap.width * 2, image.bitmap.height * 2)
-        .quality(100)
-        .crop(
-          image.bitmap.width / 4,
-          image.bitmap.height / 4,
-          image.bitmap.width / 2,
-          image.bitmap.height / 2
-        )
-        .getBase64("image/jpeg", (err, data) => {
-          dispatch(setEdit(current, data));
-        });
-    });
-  };
-
-  const zoomOut = () => {
-    Jimp.read(edits[current]).then((image) => {
-      image
-        .resize(image.bitmap.width / 2, image.bitmap.height / 2)
-        .quality(100)
-        .getBase64("image/jpeg", (err, data) => {
-          dispatch(setEdit(current, data));
-        });
-    });
-  };
-
-  const rotate = () => {
-    Jimp.read(edits[current]).then((image) => {
-      image.rotate(90).getBase64("image/jpeg", (err, data) => {
-        dispatch(setEdit(current, data));
+    Jimp.read(edits[current] || originals[current])
+      .then((image) => {
+        dispatch(
+          addText([
+            Math.round(Math.random() * image.bitmap.width - 50),
+            Math.round(Math.random() * image.bitmap.height - 50),
+          ])
+        );
+      })
+      .catch((error: Error) => {
+        throw error;
       });
-    });
+  };
+
+  const handleZoomIn = () => {
+    Jimp.read(edits[current])
+      .then((image) => {
+        image
+          .resize(image.bitmap.width * 2, image.bitmap.height * 2)
+          .quality(100)
+          .crop(
+            image.bitmap.width / 4,
+            image.bitmap.height / 4,
+            image.bitmap.width / 2,
+            image.bitmap.height / 2
+          )
+          .getBase64("image/jpeg", (error, data) => {
+            dispatch(setEdit(current, data));
+          });
+      })
+      .catch((error: Error) => {
+        throw error;
+      });
+  };
+
+  const handleZoomOut = () => {
+    Jimp.read(edits[current])
+      .then((image) => {
+        image
+          .resize(image.bitmap.width / 2, image.bitmap.height / 2)
+          .quality(100)
+          .getBase64("image/jpeg", (error, data) => {
+            dispatch(setEdit(current, data));
+          });
+      })
+      .catch((error: Error) => {
+        throw error;
+      });
+  };
+
+  const handleRotate = () => {
+    Jimp.read(edits[current])
+      .then((image) => {
+        image.rotate(90).getBase64("image/jpeg", (error, data) => {
+          dispatch(setEdit(current, data));
+        });
+      })
+      .catch((error: Error) => {
+        throw error;
+      });
+  };
+
+  const handleSetText = (event: React.FocusEvent<HTMLInputElement>) => {
+    dispatch(setText(event.target.value));
+  };
+
+  const handleClickInput = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+  };
+
+  const handleClickOverlay = () => {
+    dispatch(hideModal());
   };
 
   const modalClassnames = clsx("overlay", {
@@ -81,30 +111,22 @@ const Sidebar = () => {
         {t("sidebar.nextBlock")}
       </button>
 
-      <button onClick={zoomIn}>{t("sidebar.zoomIn")}</button>
+      <button onClick={handleZoomIn}>{t("sidebar.zoomIn")}</button>
 
-      <button onClick={zoomOut}>{t("sidebar.zoomOut")}</button>
+      <button onClick={handleZoomOut}>{t("sidebar.zoomOut")}</button>
 
-      <button onClick={rotate}>{t("sidebar.rotate")}</button>
+      <button onClick={handleRotate}>{t("sidebar.rotate")}</button>
 
-      <div
-        className={modalClassnames}
-        onClick={() => {
-          dispatch(hideModal());
-        }}
-      >
+      <div onClick={handleClickOverlay} className={modalClassnames}>
         <div className="wrapper">
           <input
             type="text"
-            onClick={(event) => {
-              event.stopPropagation();
-            }}
-            onBlur={(event) => {
-              dispatch(setText(event.target.value));
-            }}
+            onClick={handleClickInput}
+            onBlur={handleSetText}
+            placeholder={t("modal.placeholder")}
           />
 
-          <button onClick={() => insertText()}>Submit</button>
+          <button onClick={handleInsertText}>{t("modal.submit")}</button>
         </div>
       </div>
     </div>

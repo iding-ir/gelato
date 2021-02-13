@@ -5,4 +5,8 @@ export const enTranslations = {
     zoomOut: "Zoom Out",
     rotate: "Rotate",
   },
+  modal: {
+    submit: "Submit",
+    placeholder: "Example: SUNNY DAY",
+  },
 };
