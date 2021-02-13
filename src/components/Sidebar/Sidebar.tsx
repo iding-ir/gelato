@@ -23,8 +23,6 @@ const Sidebar = () => {
 
   const zoomIn = () => {
     Jimp.read(base64s[current]).then((image) => {
-      console.log(image.bitmap.width / 4);
-
       image
         .resize(image.bitmap.width * 2, image.bitmap.height * 2)
         .quality(100)
@@ -40,13 +38,21 @@ const Sidebar = () => {
     });
   };
 
+  const zoomOut = () => {
+    Jimp.read(images[current]).then((image) => {
+      image.getBase64("image/jpeg", (err, data) => {
+        dispatch(setBase64(current, data));
+      });
+    });
+  };
+
   return (
     <div className="Sidebar">
       <button onClick={insertText}>{t("sidebar.nextBlock")}</button>
 
       <button onClick={zoomIn}>{t("sidebar.zoomIn")}</button>
 
-      <button>{t("sidebar.zoomOut")}</button>
+      <button onClick={zoomOut}>{t("sidebar.zoomOut")}</button>
 
       <button>{t("sidebar.rotate")}</button>
     </div>
