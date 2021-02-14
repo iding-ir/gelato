@@ -53,7 +53,7 @@ const Sidebar = () => {
   };
 
   const handleRotate = () => {
-    Jimp.read(edits[current])
+    Jimp.read(edits[current] || originals[current])
       .then((image) => {
         image.rotate(90).getBase64("image/jpeg", (error, data) => {
           dispatch(setEdit(current, data));
