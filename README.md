@@ -54,3 +54,4 @@ npm run cypress:open
 - Add crop button
 - Include Git flow to your assessments
 - Add live demo to assessments
+- Add reset button to sidebar
