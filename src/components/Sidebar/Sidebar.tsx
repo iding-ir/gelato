@@ -6,9 +6,7 @@ import clsx from "clsx";
 
 import "./Sidebar.scss";
 import { IState } from "../../reducers";
-import { setText, addText } from "../../actions/texts";
 import { setEdit, setJimp } from "../../actions/images";
-import { showModal, hideModal } from "../../actions/modal";
 import { zoomIn, zoomOut } from "../../actions/zoom";
 
 const Sidebar = () => {
@@ -20,12 +18,11 @@ const Sidebar = () => {
   const edits = useSelector((state: IState) => state.images.edits);
   const jimps = useSelector((state: IState) => state.images.jimps);
   const current = useSelector((state: IState) => state.images.current);
-  const modalVisibility = useSelector(
-    (state: IState) => state.modal.visibility
-  );
 
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
+  const [text, setText] = useState("");
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     Jimp.read(edits[current] || originals[current])
@@ -38,10 +35,29 @@ const Sidebar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, edits]);
 
-  const handleInsertText = () => {
-    dispatch(hideModal());
+  const handleInsertText = (event: any) => {
+    setModal(false);
 
-    dispatch(addText([left, top]));
+    let loadedImage: any;
+
+    Jimp.read(edits[current] || originals[current])
+      .then((image) => {
+        loadedImage = image;
+
+        return Jimp.loadFont(Jimp.FONT_SANS_64_WHITE);
+      })
+      .then((font) => {
+        if (text) {
+          loadedImage = loadedImage.print(font, left, top, text);
+        }
+
+        loadedImage.getBase64(Jimp.AUTO, (error: Error, data: string) => {
+          dispatch(setEdit(current, data));
+        });
+      })
+      .catch((error: Error) => {
+        throw error;
+      });
   };
 
   const handleZoomIn = () => {
@@ -65,7 +81,9 @@ const Sidebar = () => {
   };
 
   const handleSetText = (event: React.FocusEvent<HTMLInputElement>) => {
-    dispatch(setText(event.target.value));
+    const text = event.target.value;
+
+    setText(text);
   };
 
   const handleClickInput = (
@@ -75,19 +93,16 @@ const Sidebar = () => {
   };
 
   const handleClickOverlay = () => {
-    dispatch(hideModal());
+    setModal(false);
   };
 
   const modalClassnames = clsx("overlay", {
-    visible: modalVisibility,
+    visible: modal,
   });
 
   return (
     <div className="Sidebar">
-      <button
-        onClick={() => dispatch(showModal())}
-        data-component-name="nextBlock"
-      >
+      <button onClick={() => setModal(true)} data-component-name="nextBlock">
         {t("sidebar.nextBlock")}
       </button>
 
