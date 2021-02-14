@@ -9,6 +9,7 @@ import { IState } from "../../reducers";
 import { setText, addText } from "../../actions/texts";
 import { setEdit, setJimp } from "../../actions/images";
 import { showModal, hideModal } from "../../actions/modal";
+import { zoomIn, zoomOut } from "../../actions/zoom";
 
 const Sidebar = () => {
   const { t } = useTranslation();
@@ -44,39 +45,11 @@ const Sidebar = () => {
   };
 
   const handleZoomIn = () => {
-    Jimp.read(edits[current])
-      .then((image) => {
-        image
-          .resize(image.bitmap.width * 2, image.bitmap.height * 2)
-          .quality(100)
-          .crop(
-            image.bitmap.width / 4,
-            image.bitmap.height / 4,
-            image.bitmap.width / 2,
-            image.bitmap.height / 2
-          )
-          .getBase64("image/jpeg", (error, data) => {
-            dispatch(setEdit(current, data));
-          });
-      })
-      .catch((error: Error) => {
-        throw error;
-      });
+    dispatch(zoomIn());
   };
 
   const handleZoomOut = () => {
-    Jimp.read(edits[current])
-      .then((image) => {
-        image
-          .resize(image.bitmap.width / 2, image.bitmap.height / 2)
-          .quality(100)
-          .getBase64("image/jpeg", (error, data) => {
-            dispatch(setEdit(current, data));
-          });
-      })
-      .catch((error: Error) => {
-        throw error;
-      });
+    dispatch(zoomOut());
   };
 
   const handleRotate = () => {

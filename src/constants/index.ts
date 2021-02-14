@@ -7,3 +7,7 @@ export const TEXTS_ADD_TEXT = "TEXTS_ADD_TEXT";
 
 export const MODAL_SHOW = "MODAL_SHOW";
 export const MODAL_HIDE = "MODAL_HIDE";
+
+export const ZOOM_IN = "ZOOM_IN";
+export const ZOOM_OUT = "ZOOM_OUT";
+export const ZOOM_RESET = "ZOOM_RESET";

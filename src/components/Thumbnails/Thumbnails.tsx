@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Thumbnails.scss";
 import { IState } from "../../reducers";
 import { setImage } from "../../actions/images";
+import { zoomReset } from "../../actions/zoom";
 
 const Thumbnails = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const Thumbnails = () => {
 
   const onClick = (image: string) => {
     dispatch(setImage(image));
+
+    dispatch(zoomReset());
   };
 
   const renderThumbnails = () =>

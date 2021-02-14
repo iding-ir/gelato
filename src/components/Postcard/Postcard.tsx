@@ -14,6 +14,7 @@ const Postcard = () => {
   const current = useSelector((state: IState) => state.images.current);
   const text = useSelector((state: IState) => state.texts.text);
   const position = useSelector((state: IState) => state.texts.position);
+  const currentZoom = useSelector((state: IState) => state.zoom.current);
 
   useEffect(() => {
     let loadedImage: any;
@@ -45,6 +46,9 @@ const Postcard = () => {
         src={edits[current] || originals[current]}
         alt={current}
         data-component-name={`full-${current}`}
+        style={{
+          transform: `translate(-50%, -50%) scale(${1 + 0.1 * currentZoom})`,
+        }}
       />
     );
   };
