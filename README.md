@@ -4,6 +4,8 @@
 - [Design](#design)
 - [Demo](#demo)
 - [Commands](#commands)
+- [Development Plan and Estimates](#development-plan-and-estimates)
+- [Suggestions](#suggestions)
 
 ## About
 
@@ -25,14 +27,30 @@
 npm start
 ```
 
-#### Unit test
+#### Unit test with Jest
 
 ```
-npm run test
+npm run test .
 ```
 
-#### Integration test
+#### Integration test with Cypress
 
 ```
 npm run cypress:open
 ```
+
+## Development Plan and Estimates
+
+- Research: make a list of javascript image manipulation libraries (3 hours)
+- Scaffold the project (1 hour)
+- Create the layout (3 hours)
+- Add functionality for adding text blocks (3 hours)
+- Add functionality for zooming in/out (2 hours)
+- Add functionality for rotation (1 hour)
+- Write tests (3 hours)
+
+## Suggestions
+
+- Add crop button
+- Include Git flow to your assessments
+- Add live demo to assessments
